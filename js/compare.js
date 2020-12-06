@@ -3,11 +3,9 @@ $(function () {
     $.getJSON("js/data.json", function (items) {
         console.log(items);
         ds = items;
-        displayImages(data);
-       
+        displayImages(ds);
+        
     });
-    
-    //lap trinh su kien click chon TYPE/BRAND san pham
     $("input[type=checkbox]").click(function () {
 
         var types =
@@ -21,34 +19,39 @@ $(function () {
             let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.type) >= 0);
 
             displayImages(subdata);
+
         }
         else {
             let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.brand) >= 0);
 
             displayImages(subdata);
-        }
-    });
 
+        }
+
+    });
+    
     /* control dropdown*/
     // Function: append product 
     function myAppend() {
         var i;
+        let s=``;
         for (i = 0; i < ds.length; ++i) {
 
-            $("#showshop").append(
+            s+=
                 '<div class="col-sm-4 image  ' + ds[i].type + ' ' + ds[i].brand + '" style = "margin-bottom: 2em">' +
-                '<a href = "' + ds[i].id + '.html" target = "_blank"><img src="images\\' + ds[i].link + '" class="img-responsive ep_fade ep_fade_0 card" style="width:100%" alt="Image"></a>' +
-                '<p>' + ds[i].name + '</p>' +
+                '<img src="images\\' + ds[i].link + '" class="img-responsive ep_fade ep_fade_0 card" style="width:100%" alt="Image">' +
+                '<p style="font-size:2rem;">' + ds[i].name + '</p>' +
                 '<p>' + ds[i].cost + '</p>' +
                 '<input type="checkbox" class="checkbox mark" name = "product" value = "' + ds[i].id + '">' +
                 '</div>'
-            )
+            
         }
+        $("#showshop").append(s);
     };
     // Function: compare product
     function myCompare() {
         var product = document.getElementsByName("product");
-        var mark = new Array();
+        var mark = [];
         for (var i = 0; i < product.length; ++i) {
             if (product[i].checked == true) {
                 mark.push(product[i].value);
@@ -67,7 +70,7 @@ $(function () {
                 $("#showshop").fadeIn(1000);
             })
         } else {
-            var arr = new Array();
+            var arr = [];
             for (var i = 0; i < mark.length; ++i) {
                 for (var j = 0; j < ds.length; ++j) {
                     if (ds[j].id == mark[i]) {
@@ -77,23 +80,25 @@ $(function () {
                 }
             }
             $("#information").append(
+                '<div class="col-xs-3">' +
                 '<div class="row border rowImage">' +
                 '<p style="line-height:10em">Image</p>' +
                 '</div>' +
-                '<div class="row border">' +
+                '<div class="row border" id="name">' +
                 '<p>Name</p><br>' +
                 '</div>' +
                 '<div class="row border">' +
                 '<p>Color</p>' +
                 '</div>' +
                 '<div class="row border">' +
-                '<p>Size</p><br>' +
+                '<p>Size</p><br></br>' +
                 '</div>' +
                 '<div class="row border">' +
                 '<p>Made in</p>' +
                 '</div>' +
                 '<div class="row border">' +
                 '<p>Price</p>' +
+                '</div>' +
                 '</div>'
             );
             var n = Math.floor(12 / mark.length);
@@ -203,15 +208,15 @@ $(function () {
             })
         })
 
-        $("#BB").click(function () {
+        $("#B").click(function () {
             $("#information, #product").hide(function () {
                 $(".Image").hide();
-                $(".BB").show();
+                $(".B").show();
                 $("#showshop").fadeIn(1000);
             })
         })
 
-        $("#LM").click(function () {
+        $("#L").click(function () {
             $("#information, #product").hide(function () {
                 $(".Image").hide();
                 $(".LM").show();
