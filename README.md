@@ -21,7 +21,7 @@ eProject documentation at
 
 ============================
 
-eProject published at 
+eProject published at https://minhthu168.github.io/project_NEWTAG/
 
 ============================
 
