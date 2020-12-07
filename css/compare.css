@@ -1,36 +1,52 @@
+h1 {
+  padding-top: 50px;
+  text-align: center;
+  color: blue;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.container{
+  padding-top:5px;
+  position: absolute;
+}
 .type{
     font-weight: bold;
   }
-  
   .rowImage{
     height: 15em;
     padding-bottom: 10px;
-    
   }
-  
+ .image{
+  box-shadow: 0px 0px 3px rgb(150, 157, 168);
+  margin:10px;
+  font-size: 2rem;
+  color: cornflowerblue;
+  font-weight: bold;
+  width: 440px;
+  height: 500px;
+ 
+ }
   #information p{
    margin: 0;
-   line-height: 2em;
+   line-height: 1em;
   }
   
   #product p{
     margin: 0;
-    line-height: 2em;
+    line-height: 1em;
   }
-  
-  /* image */
-  .Image {
-    width: 100%;
-    border: solid lightgray medium;
-    display: block;
-    margin: auto;
-}
-  
+    
   .mark{
     position: absolute;
     top: 10px;
     left: 20px;
   }   
+  #cost{
+    color:red;
+  }
+  .border{
+    padding:1rem;
+    border:white solid thin;
+  }
   /* type */
   .checkbox{
     display: inline-block;
@@ -70,3 +86,4 @@
       width: 200px;
       margin-top: 15px;
   }
+  

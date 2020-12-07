@@ -3,9 +3,11 @@ $(function () {
     $.getJSON("js/data.json", function (items) {
         console.log(items);
         ds = items;
-        displayImages(ds);
-        
+       displayImages(ds);
+
     });
+
+    //lap trinh su kien click chon TYPE/BRAND san pham
     $("input[type=checkbox]").click(function () {
 
         var types =
@@ -16,42 +18,21 @@ $(function () {
 
         types = types.toString();
         if (types == "Purse" || types == "Wallet") {
-            let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.type) >= 0);
-
+            let subdata = (types.length == 0) ? ds : ds.filter(item => types.search(item.type) >= 0);
             displayImages(subdata);
 
         }
         else {
-            let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.brand) >= 0);
-
+            let subdata = (types.length == 0) ? ds : ds.filter(item => types.search(item.brand) >= 0);
             displayImages(subdata);
 
         }
 
     });
-    
-    /* control dropdown*/
-    // Function: append product 
-    function myAppend() {
-        var i;
-        let s=``;
-        for (i = 0; i < ds.length; ++i) {
-
-            s+=
-                '<div class="col-sm-4 image  ' + ds[i].type + ' ' + ds[i].brand + '" style = "margin-bottom: 2em">' +
-                '<img src="images\\' + ds[i].link + '" class="img-responsive ep_fade ep_fade_0 card" style="width:100%" alt="Image">' +
-                '<p style="font-size:2rem;">' + ds[i].name + '</p>' +
-                '<p>' + ds[i].cost + '</p>' +
-                '<input type="checkbox" class="checkbox mark" name = "product" value = "' + ds[i].id + '">' +
-                '</div>'
-            
-        }
-        $("#showshop").append(s);
-    };
-    // Function: compare product
+    // compare product
     function myCompare() {
         var product = document.getElementsByName("product");
-        var mark = [];
+        var mark = new Array();
         for (var i = 0; i < product.length; ++i) {
             if (product[i].checked == true) {
                 mark.push(product[i].value);
@@ -70,7 +51,7 @@ $(function () {
                 $("#showshop").fadeIn(1000);
             })
         } else {
-            var arr = [];
+            var arr = new Array();
             for (var i = 0; i < mark.length; ++i) {
                 for (var j = 0; j < ds.length; ++j) {
                     if (ds[j].id == mark[i]) {
@@ -80,25 +61,23 @@ $(function () {
                 }
             }
             $("#information").append(
-                '<div class="col-xs-3">' +
                 '<div class="row border rowImage">' +
                 '<p style="line-height:10em">Image</p>' +
                 '</div>' +
-                '<div class="row border" id="name">' +
+                '<div class="row border">' +
                 '<p>Name</p><br>' +
                 '</div>' +
                 '<div class="row border">' +
                 '<p>Color</p>' +
                 '</div>' +
                 '<div class="row border">' +
-                '<p>Size</p><br></br>' +
+                '<p>Size</p><br>' +
                 '</div>' +
                 '<div class="row border">' +
                 '<p>Made in</p>' +
                 '</div>' +
                 '<div class="row border">' +
                 '<p>Price</p>' +
-                '</div>' +
                 '</div>'
             );
             var n = Math.floor(12 / mark.length);
@@ -139,91 +118,6 @@ $(function () {
     }
 
     $(function () {
-
-        /* append product */
-        myAppend();
-
-        /*display*/
-        $('#purse').click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".purse").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $('#wallet').click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".wallet").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#L").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".L").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#G").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".G").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#D").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".D").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#F").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".F").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#C").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".C").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#P").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".P").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#B").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".B").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-
-        $("#L").click(function () {
-            $("#information, #product").hide(function () {
-                $(".Image").hide();
-                $(".LM").show();
-                $("#showshop").fadeIn(1000);
-            })
-        })
-        /* compare */
         $("#compare").click(function () {
             $("#information, #product").empty();
             $("#showshop").hide(function () {
@@ -233,14 +127,12 @@ $(function () {
 
         })
 
-        /* reset */
         $("#reset").click(function () {
             myReset();
             $("#information, #product").fadeOut();
             $("#showshop").fadeIn(1000);
             $("#product").empty();
         })
-
     })
     /* scoll to top */
     $(window).scroll(function () {
@@ -256,3 +148,17 @@ $(function () {
     });
 
 })
+function displayImages(items) {
+    let s = '';
+    $.each(items, function (k, v) {
+            s = s + '<div class="col-sm-4 image ' + v.type + ' ' +v.brand + '" style = "margin-bottom: 2em">' +
+            '<img src="images\\' + v.link + '" class="img-responsive ep_fade ep_fade_0 card divImage" style="width:100%" alt="Image">' +
+            '<p>' + v.name + '</p>' +
+             '<p id="cost">'+ v.cost +  '</p>' +
+            '<input type="checkbox" class="checkbox mark" name = "product" value = "' + v.id + '">' +
+            '</div>'
+    });
+
+    console.log(s)
+    $("#showshop").html(s);
+}

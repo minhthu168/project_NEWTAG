@@ -1,6 +1,6 @@
 <div class="container">
     <div class="page-header">
-        <h1>Products </h1>
+        <h1>PRODUCTS</h1>
     </div>
 
     <div class="row">
@@ -20,10 +20,11 @@
                 <h3>BRAND</h3>
                 <hr>
                 <div class="checkbox">
-                    <label><input type="checkbox" value="Louis Vuitton" id="L" class="type"  name="type">Louis Vuitton</label>
+                    <label><input type="checkbox" value="Louis Vuitton" id="L" class="type" name="type">Louis
+                        Vuitton</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" value="Gucci" id="G" class="type"  name="type">Gucci</label>
+                    <label><input type="checkbox" value="Gucci" id="G" class="type" name="type">Gucci</label>
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" value="Dior" id="D" class="type" name="type">Dior</label>
@@ -41,7 +42,8 @@
                     <label><input type="checkbox" value="Burberry" id="BB" class="type" name="type">Burberry</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" value="Love Moschino" id="LM" class="type" name="type">Love Moschino</label>
+                    <label><input type="checkbox" value="Love Moschino" id="LM" class="type" name="type">Love
+                        Moschino</label>
                 </div>
             </div>
 
@@ -57,15 +59,20 @@
             .container {
                 width: 95%;
             }
+
             h1 {
                 padding-top: 3rem;
                 text-align: center;
+                color:blue;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             }
+
             .Image {
                 border: solid lightgray medium;
                 display: block;
                 margin: auto;
             }
+
             .divImage {
                 width: 450px;
                 height: 500px;
@@ -75,6 +82,10 @@
                 box-shadow: 0px 0px 3px gray;
                 padding: 10px;
             }
+            #cost{
+                color:red;
+                font-size: 2rem;
+            }
             .v-menu1 {
                 box-shadow: 0px 0px 3px rgb(150, 157, 168);
                 padding: 2rem;
@@ -83,15 +94,18 @@
                 height: 170px;
                 color: black;
             }
+
             .v-menu2 {
                 box-shadow: 0px 0px 3px rgb(150, 157, 168);
                 padding: 2rem;
                 margin-top: 4rem;
                 width: 200px;
             }
+
             .modal-content {
                 width: 800px;
             }
+
             .modal-header {
                 background-color: thistle;
             }
@@ -108,23 +122,23 @@
             });
             //lap trinh su kien click chon loai san pham
             $("input[type=checkbox]").click(function () {
-            
-            var types =
-                $('input:checkbox[name="type"]:checked')
-                    .map(function () {
-                        return $(this).val();
-                    }).get();
-                
-            types = types.toString();
-            if(types=="Wallet"||types=="Purse"){
-            let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.type) >= 0);
-            displayImages(subdata);
-        }
-           else{
-            let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.brand) >= 0);
-            displayImages(subdata);
-        }           
-    });
+
+                var types =
+                    $('input:checkbox[name="type"]:checked')
+                        .map(function () {
+                            return $(this).val();
+                        }).get();
+
+                types = types.toString();
+                if (types == "Wallet" || types == "Purse") {
+                    let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.type) >= 0);
+                    displayImages(subdata);
+                }
+                else {
+                    let subdata = (types.length == 0) ? data : data.filter(item => types.search(item.brand) >= 0);
+                    displayImages(subdata);
+                }
+            });
         });
         function displayImages(items) {
             let s = ``;
@@ -134,9 +148,9 @@
                 s += `<a data-toggle="modal" href="#${v.id}"><div class="col-sm-6 col-md-4 divImage">
                         <img src="images/${v.link}" alt="" class="Image">
                         <p style="font-size:2rem;">
-                            <b>${v.name}</b><br>
-                            ${v.cost}
-                        </p></a>
+                            <b>${v.name}</b></p>
+                           <p id="cost"> ${v.cost}</p>
+                        </a>
                         
                         <p>
                             <!-- Modal -->
@@ -179,8 +193,8 @@
                         </p>   
                       </div> `;
             });
+           
             $("#products").html(s);
-
         }
     </script>
 
